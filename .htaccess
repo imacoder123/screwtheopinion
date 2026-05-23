@@ -1,0 +1,28 @@
+RewriteEngine On
+
+# API routing
+RewriteRule ^api/(init_db|auth|register|refresh|logout|search_users|send_invite|get_invites|accept_invite|cancel_invite|get_contacts|get_conversations|create_conversation|get_messages|send_message|edit_message|delete_message|react_message|pin_message|upload|notifications|presence|typing|block|search_messages|profile|group|sse|ratchet_server|ChatSocket) api/$1.php [L,QSA]
+
+# Allow direct access to existing files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Deny access to sensitive files
+<FilesMatch "\.(sql|md|env|git)$">
+    Require all denied
+</FilesMatch>
+
+# Upload size limit
+php_value upload_max_filesize 50M
+php_value post_max_size 55M
+php_value max_execution_time 300
+php_value max_input_time 300

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: messenger-app
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - .:/var/www/html
+      - uploads_data:/var/www/html/uploads
+    environment:
+      - DB_HOST=db
+      - DB_USER=messenger
+      - DB_PASS=messenger_pass
+      - DB_NAME=messenger_db
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: messenger-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: messenger_db
+      MYSQL_USER: messenger
+      MYSQL_PASSWORD: messenger_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    restart: unless-stopped
+
+  websocket:
+    build: .
+    container_name: messenger-ws
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/var/www/html
+    command: php api/ratchet_server.php
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  uploads_data:

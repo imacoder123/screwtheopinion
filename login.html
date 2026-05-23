@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link rel="icon" type="image/x-icon" href="SCT.png">
+
+<style>
+@font-face {
+    font-family: 'Horizon';
+    src: url('font.otf') format('opentype');
+}
+
+body {
+    background: #efeeda;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
+    font-family: 'Horizon', sans-serif;
+}
+
+/* Floating Popup Window */
+.popup {
+    width: 620px;              /* fits content only */
+    background: #1c3a5f;
+    box-shadow: 0 0 18px #000;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+/* Header */
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7c9cbf;
+    height: 32px;
+    font-size: 14px;
+    text-transform: uppercase;
+    position: relative;
+    color: #000;
+}
+
+.popup-x {
+    width: 42px;
+    height: 100%;
+    background: #b20000;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Form */
+.form-container {
+    padding: 30px 40px;
+    color: #9ba3ae;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    background: #9ba3ae;
+    border: 2px solid #000;
+    margin-bottom: 18px;
+    font-family: 'Horizon', sans-serif;
+    color: #000;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    padding: 10px 22px;
+    border: 2px solid #000;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Horizon', sans-serif;
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.btn-login {
+    background: #9ba3ae;
+    color: #050816;
+}
+
+.btn-back {
+    background: #b20000;
+    color: #000;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    background: #1c3a5f;
+    padding: 2px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #9ba3ae;
+    text-transform: uppercase;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-left {
+    text-align: left;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.footer-center {
+    text-align: center;
+    font-size: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-60%);
+}
+
+.footer-right {
+    text-align: right;
+    font-size: 12px;
+    transform: translateX(-40%);
+}
+
+.highlight-name {
+    color: #7c9cbf;
+}
+</style>
+</head>
+
+<body>
+
+<div class="popup">
+    <div class="popup-header">
+        <div class="popup-title">Login to Dashboard</div>
+        <div class="popup-x">X</div>
+    </div>
+
+    <div class="form-container">
+        <form action="login.php" method="POST">
+
+            <label>Username or Email:</label>
+            <input type="text" name="username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit" class="btn btn-login">Log In</button>
+        </form>
+
+        <a class="btn btn-back" href="index.html">Go Back</a>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-left">
+        Build Dashboards<br>
+        Share Vlogs<br>
+        Screw Opinions
+    </div>
+
+    <div class="footer-center">
+        A <span class="highlight-name">Sai Srijan</span> Production
+    </div>
+
+    <div class="footer-right">
+        ScrewTheOpinion™
+    </div>
+</div>
+
+</body>
+</html>
