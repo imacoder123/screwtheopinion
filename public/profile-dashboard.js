@@ -216,7 +216,7 @@ searchInput.addEventListener("input", () => {
 
 viewProfileBtn.addEventListener("click", () => {
     const username = foundUsername.textContent;
-    window.location.href = `view_profile.php?user=${encodeURIComponent(username)}`;
+    window.location.href = `/api/profile?user_id=${encodeURIComponent(username)}`;
 });
 
 /* ---------------------------

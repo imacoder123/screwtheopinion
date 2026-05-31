@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Dashboard</title>
+<title>Login</title>
 
 <link rel="icon" type="image/x-icon" href="SCT.png">
 
@@ -17,21 +17,22 @@ body {
     background: #efeeda;
     margin: 0;
     padding: 0;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
     font-family: 'Horizon', sans-serif;
 }
 
-/* Popup */
+/* Floating Popup Window */
 .popup {
-    width: 820px;
-    max-width: 90vw;
+    width: 620px;              /* fits content only */
     background: #1c3a5f;
     box-shadow: 0 0 18px #000;
-    min-height: calc(100vh - 50px);
-    margin-top: 0;
-    padding-bottom: 80px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding-bottom: 20px;
+    position: relative;
 }
 
 /* Header */
@@ -84,14 +85,9 @@ input {
     color: #000;
 }
 
-
-input[type="password"] {
-    font-family: initial !important;
-}
-
 /* Buttons */
 .btn {
-    display: inline-block;
+    display: block;
     padding: 10px 22px;
     border: 2px solid #000;
     text-decoration: none;
@@ -99,12 +95,11 @@ input[type="password"] {
     cursor: pointer;
     text-transform: uppercase;
     font-family: 'Horizon', sans-serif;
-    display: block;
     width: fit-content;
     margin: 10px auto;
 }
 
-.btn-create {
+.btn-login {
     background: #9ba3ae;
     color: #050816;
 }
@@ -112,7 +107,6 @@ input[type="password"] {
 .btn-back {
     background: #b20000;
     color: #000;
-    margin-left: 10px;
 }
 
 /* Footer */
@@ -160,32 +154,24 @@ input[type="password"] {
 
 <div class="popup">
     <div class="popup-header">
-        <div class="popup-title">Enter Your Details</div>
+        <div class="popup-title">Login to Dashboard</div>
         <div class="popup-x">X</div>
     </div>
 
-<div class="form-container">
-    <form action="signup.php" method="POST">
+    <div class="form-container">
+        <form action="/api/auth" method="POST">
 
-        <label>Name:</label>
-        <input type="text" name="name" required>
+            <label>Username or Email:</label>
+            <input type="text" name="username" required>
 
-        <label>Email:</label>
-        <input type="email" name="email" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
 
-        <label>Username:</label>
-        <input type="text" name="username" required>
+            <button type="submit" class="btn btn-login">Log In</button>
+        </form>
 
-        <label>Password:</label>
-        <input type="password" name="password" required>
-
-        <label>Confirm Password:</label>
-        <input type="password" name="confirm_password" required>
-
-        <button type="submit" class="btn btn-create">Create Dashboard</button>
-    </form>
-
-    <a class="btn btn-back" href="index.html">Go Back</a>
+        <a class="btn btn-back" href="index.html">Go Back</a>
+    </div>
 </div>
 
 <div class="footer">
