@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<link rel="icon" type="image/x-icon" href="SCT.png">
+
+<style>
+@font-face {
+    font-family: 'Horizon';
+    src: url('font.otf') format('opentype');
+}
+
+:root {
+    --bg-dark:      #0d1520;
+    --navy:         #1C3A5F;
+    --navy-light:   #2a5080;
+    --panel-bg:     #0f1a28;
+    --panel-border: rgba(28,58,95,0.4);
+    --text-bright:  #c8d8e8;
+    --text-mid:     #7a9ab8;
+    --text-dim:     #4a6a8a;
+    --accent:       #5a8fc8;
+    --accent-hover: #7aafde;
+    --input-bg:     #0a1420;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse at 30% 40%, rgba(28,58,95,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 60%, rgba(28,58,95,0.08) 0%, transparent 45%);
+    font-family: 'Horizon', 'Segoe UI', Tahoma, sans-serif;
+    color: var(--text-bright);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Header Bar */
+.dash-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #1e3a55 0%, #142a47 100%);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.dash-logo {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-bright);
+}
+
+.dash-logo span {
+    color: var(--accent);
+}
+
+.dash-nav {
+    display: flex;
+    gap: 16px;
+}
+
+.dash-nav a {
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.dash-nav a:hover {
+    color: var(--text-bright);
+    border-color: var(--panel-border);
+    background: rgba(28,58,95,0.2);
+}
+
+.dash-nav a.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(90,143,200,0.1);
+}
+
+/* Main Container */
+.welcome-container {
+    width: 100%;
+    max-width: 700px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome Panel */
+.panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.panel-header {
+    background: linear-gradient(180deg, #1e3a55 0%, #142a47 100%);
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-header .icon {
+    font-size: 16px;
+}
+
+.panel-body {
+    padding: 24px 28px;
+}
+
+/* User Info */
+.welcome-greeting {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+}
+
+.welcome-greeting .accent {
+    color: var(--accent);
+}
+
+.welcome-sub {
+    font-size: 12px;
+    color: var(--text-mid);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.info-card {
+    background: var(--input-bg);
+    border: 1px solid rgba(28,58,95,0.3);
+    border-radius: 6px;
+    padding: 14px 16px;
+}
+
+.info-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+}
+
+.info-value {
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    word-break: break-word;
+}
+
+/* Quick Actions */
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.action-card {
+    background: linear-gradient(135deg, rgba(28,58,95,0.3) 0%, rgba(15,26,40,0.8) 100%);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    text-decoration: none;
+    color: var(--text-bright);
+}
+
+.action-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28,58,95,0.4);
+}
+
+.action-card .action-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.action-card .action-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.action-card .action-desc {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    background: var(--navy);
+    padding: 2px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 10px;
+}
+
+.footer-center {
+    text-align: center;
+    font-size: 13px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.highlight-name {
+    color: #7c9cbf;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .info-grid,
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dash-nav {
+        display: none;
+    }
+
+    .welcome-greeting {
+        font-size: 18px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px 20px;
+    }
+
+    .footer-center {
+        position: static;
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="dash-header">
+    <div class="dash-logo"><span>ScrewTheOpinion</span>™</div>
+    <div class="dash-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="login.html">Login</a>
+        <a href="index.html">Home</a>
+    </div>
+</div>
+
+<!-- Welcome Section -->
+<div class="welcome-container">
+
+    <!-- User Info Panel -->
+    <div class="panel">
+        <div class="panel-header">
+            <span class="icon">&#9733;</span>
+            Welcome
+        </div>
+        <div class="panel-body">
+            <div class="welcome-greeting">
+                Hello, <span class="accent" id="displayName">User</span>
+            </div>
+            <div class="welcome-sub">
+                Your dashboard is ready &mdash; @<span id="displayUsername">username</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">Display Name</div>
+                    <div class="info-value" id="infoName">—</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Username</div>
+                    <div class="info-value" id="infoUsername">—</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Panel -->
+    <div class="panel">
+        <div class="panel-header">
+            <span class="icon">&#9881;</span>
+            Quick Actions
+        </div>
+        <div class="panel-body">
+            <div class="actions-grid">
+                <a class="action-card" href="login.html">
+                    <div class="action-icon">&#128274;</div>
+                    <div class="action-title">Log Out</div>
+                    <div class="action-desc">Sign out of your account</div>
+                </a>
+                <a class="action-card" href="index.html">
+                    <div class="action-icon">&#127968;</div>
+                    <div class="action-title">Home</div>
+                    <div class="action-desc">Return to the homepage</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div>ScrewTheOpinion™</div>
+    <div class="footer-center">
+        A <span class="highlight-name">Sai Srijan</span> Production
+    </div>
+    <div>Build Dashboards</div>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
